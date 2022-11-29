@@ -1,10 +1,19 @@
 package me.restcrud.controllers;
 
+import me.restcrud.model.Usuario;
+import me.restcrud.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class GrettingsController {
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     @RequestMapping(value = "/mostranome/{name}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -18,5 +27,30 @@ public class GrettingsController {
     public String olaMundo(@PathVariable String name) {
 
         return "Olá Mundo " + name;
+    }
+
+    @GetMapping(value = "/listatodos")
+    @ResponseBody
+    public ResponseEntity<List<Usuario>> listaUsuario(){
+
+        List<Usuario> usuarioList = usuarioRepository.findAll();
+
+        return new ResponseEntity<>(usuarioList, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/salvar")
+    @ResponseBody
+    public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario){
+
+        Usuario usuarioSalvo = usuarioRepository.save(usuario);
+
+        return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
+    }
+    @DeleteMapping(value = "/delete")
+    @ResponseBody
+    public ResponseEntity<String> delete(@RequestParam Long userId) {
+        usuarioRepository.deleteById(userId);
+
+        return new ResponseEntity<>("User deletado com sucesso.", HttpStatus.OK);
     }
 }
