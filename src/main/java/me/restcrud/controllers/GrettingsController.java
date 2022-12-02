@@ -32,16 +32,12 @@ public class GrettingsController {
     @GetMapping(value = "/listatodos")
     @ResponseBody
     public ResponseEntity<List<Usuario>> listaUsuario(){
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
         List<Usuario> usuarioList = usuarioRepository.findAll();
 
         return new ResponseEntity<>(usuarioList, HttpStatus.OK);
     }
-<<<<<<< Updated upstream
-=======
+
     @GetMapping(value = "/buscausuarioid")
     @ResponseBody
     public ResponseEntity<Usuario> buscaUsuarioId(@RequestParam(name = "userId") Long userId){
@@ -59,21 +55,15 @@ public class GrettingsController {
 
         return new ResponseEntity<>(usuarioList, HttpStatus.OK);
     }
->>>>>>> Stashed changes
 
     @PostMapping(value = "/salvar")
     @ResponseBody
     public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario){
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
 
         return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
     }
-<<<<<<< Updated upstream
-=======
 
     @PutMapping(value = "/atualizar")
     @ResponseBody
@@ -87,7 +77,6 @@ public class GrettingsController {
         return new ResponseEntity<>(usuarioAtualizado, HttpStatus.OK);
     }
 
->>>>>>> Stashed changes
     @DeleteMapping(value = "/delete")
     @ResponseBody
     public ResponseEntity<String> delete(@RequestParam Long userId) {
